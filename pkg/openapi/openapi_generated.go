@@ -81,7 +81,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 					Properties: map[string]spec.Schema{
 						"kubeAPIServer": {
 							SchemaProps: spec.SchemaProps{
-								Description: "Upstream has a todo to replace this with a relevant type",
+								Description: "generic map[string]string types would eventually be replaced by corresponding structured types as they become available upstream",
 								Type:        []string{"object"},
 								AdditionalProperties: &spec.SchemaOrBool{
 									Schema: &spec.Schema{
@@ -231,7 +231,8 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 						},
 						"clusterConfig": {
 							SchemaProps: spec.SchemaProps{
-								Ref: ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.ClusterConfig"),
+								Description: "ClusterConfig is the set of configurable parameters for the cluster. If not provided, the parameters are set to their default values.",
+								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.ClusterConfig"),
 							},
 						},
 					},
