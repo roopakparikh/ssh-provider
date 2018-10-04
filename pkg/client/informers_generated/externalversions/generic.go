@@ -24,6 +24,7 @@ import (
 	"fmt"
 
 	v1alpha1 "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1"
+	v1alpha2 "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	cache "k8s.io/client-go/tools/cache"
 )
@@ -57,6 +58,10 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 	// Group=sshprovider.platform9.com, Version=v1alpha1
 	case v1alpha1.SchemeGroupVersion.WithResource("provisionedmachines"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Sshprovider().V1alpha1().ProvisionedMachines().Informer()}, nil
+
+		// Group=sshprovider.platform9.com, Version=v1alpha2
+	case v1alpha2.SchemeGroupVersion.WithResource("provisionedmachines"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Sshprovider().V1alpha2().ProvisionedMachines().Informer()}, nil
 
 	}
 

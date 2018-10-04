@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 // Source: https://github.com/kubernetes/kubernetes/blob/v1.10.4/pkg/proxy/apis/kubeproxyconfig/v1alpha1/types.go
-package v1alpha1
+package v1alpha2
 
 import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"

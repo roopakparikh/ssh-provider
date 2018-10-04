@@ -22,6 +22,8 @@ import (
 	clientset "github.com/platform9/ssh-provider/pkg/client/clientset_generated/clientset"
 	sshproviderv1alpha1 "github.com/platform9/ssh-provider/pkg/client/clientset_generated/clientset/typed/sshprovider/v1alpha1"
 	fakesshproviderv1alpha1 "github.com/platform9/ssh-provider/pkg/client/clientset_generated/clientset/typed/sshprovider/v1alpha1/fake"
+	sshproviderv1alpha2 "github.com/platform9/ssh-provider/pkg/client/clientset_generated/clientset/typed/sshprovider/v1alpha2"
+	fakesshproviderv1alpha2 "github.com/platform9/ssh-provider/pkg/client/clientset_generated/clientset/typed/sshprovider/v1alpha2/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"
@@ -62,12 +64,17 @@ func (c *Clientset) Discovery() discovery.DiscoveryInterface {
 
 var _ clientset.Interface = &Clientset{}
 
-// SshproviderV1alpha1 retrieves the SshproviderV1alpha1Client
-func (c *Clientset) SshproviderV1alpha1() sshproviderv1alpha1.SshproviderV1alpha1Interface {
-	return &fakesshproviderv1alpha1.FakeSshproviderV1alpha1{Fake: &c.Fake}
+// SshproviderV1alpha2 retrieves the SshproviderV1alpha2Client
+func (c *Clientset) SshproviderV1alpha2() sshproviderv1alpha2.SshproviderV1alpha2Interface {
+	return &fakesshproviderv1alpha2.FakeSshproviderV1alpha2{Fake: &c.Fake}
 }
 
-// Sshprovider retrieves the SshproviderV1alpha1Client
-func (c *Clientset) Sshprovider() sshproviderv1alpha1.SshproviderV1alpha1Interface {
+// Sshprovider retrieves the SshproviderV1alpha2Client
+func (c *Clientset) Sshprovider() sshproviderv1alpha2.SshproviderV1alpha2Interface {
+	return &fakesshproviderv1alpha2.FakeSshproviderV1alpha2{Fake: &c.Fake}
+}
+
+// SshproviderV1alpha1 retrieves the SshproviderV1alpha1Client
+func (c *Clientset) SshproviderV1alpha1() sshproviderv1alpha1.SshproviderV1alpha1Interface {
 	return &fakesshproviderv1alpha1.FakeSshproviderV1alpha1{Fake: &c.Fake}
 }

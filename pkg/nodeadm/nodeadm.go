@@ -5,7 +5,7 @@ import (
 	"strconv"
 
 	spconstants "github.com/platform9/ssh-provider/constants"
-	spv1 "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1"
+	spv2 "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2"
 	"github.com/platform9/ssh-provider/pkg/controller"
 	clusterv1 "sigs.k8s.io/cluster-api/pkg/apis/cluster/v1alpha1"
 )
@@ -14,14 +14,14 @@ type InitConfiguration struct {
 	MasterConfiguration KubeadmInitConfiguration   `json:"masterConfiguration,omitempty"`
 	Networking          Networking                 `json:"networking,omitempty"`
 	VIPConfiguration    VIPConfiguration           `json:"vipConfiguration,omitempty"`
-	Kubelet             *spv1.KubeletConfiguration `json:"kubelet,omitempty"`
+	Kubelet             *spv2.KubeletConfiguration `json:"kubelet,omitempty"`
 	NetworkBackend      map[string]string          `json:"networkBackend,omitempty"`
 	KeepAlived          map[string]string          `json:"keepAlived,omitempty"`
 }
 
 type JoinConfiguration struct {
 	Networking Networking                 `json:"networking,omitempty"`
-	Kubelet    *spv1.KubeletConfiguration `json:"kubelet,omitempty"`
+	Kubelet    *spv2.KubeletConfiguration `json:"kubelet,omitempty"`
 }
 
 type VIPConfiguration struct {
@@ -50,8 +50,8 @@ type KubeadmInitConfiguration struct {
 	Etcd                       Etcd                        `json:"etcd,omitempty"`
 	KubernetesVersion          string                      `json:"kubernetesVersion,omitempty"`
 	Networking                 Networking                  `json:"networking,omitempty"`
-	KubeletConfiguration       spv1.KubeletConfiguration   `json:"kubeletConfiguration,omitempty"`
-	KubeProxy                  spv1.KubeProxyConfiguration `json:"kubeProxy,omitempty"`
+	KubeletConfiguration       spv2.KubeletConfiguration   `json:"kubeletConfiguration,omitempty"`
+	KubeProxy                  spv2.KubeProxyConfiguration `json:"kubeProxy,omitempty"`
 	APIServerExtraArgs         map[string]string           `json:"apiServerExtraArgs,omitempty"`
 	ControllerManagerExtraArgs map[string]string           `json:"controllerManagerExtraArgs,omitempty"`
 	SchedulerExtraArgs         map[string]string           `json:"schedulerExtraArgs,omitempty"`
@@ -71,7 +71,7 @@ type Etcd struct {
 	KeyFile   string   `json:"keyFile,omitempty"`
 }
 
-func InitConfigurationForMachine(cluster clusterv1.Cluster, machine clusterv1.Machine, pm spv1.ProvisionedMachine) (*InitConfiguration, error) {
+func InitConfigurationForMachine(cluster clusterv1.Cluster, machine clusterv1.Machine, pm spv2.ProvisionedMachine) (*InitConfiguration, error) {
 	cfg := &InitConfiguration{}
 
 	cpc, err := controller.GetClusterSpec(cluster)
@@ -124,7 +124,7 @@ func InitConfigurationForMachine(cluster clusterv1.Cluster, machine clusterv1.Ma
 // SetKubeAPIServerConfig sets configuration for API Server.
 // Depending on the parameter name this function sets
 // the MasterConfiguration fields or APIServerExtraArgs
-func setKubeAPIServerConfig(cfg *InitConfiguration, clusterConfig *spv1.ClusterConfig) error {
+func setKubeAPIServerConfig(cfg *InitConfiguration, clusterConfig *spv2.ClusterConfig) error {
 	if clusterConfig.KubeAPIServer != nil {
 		// Set fields for API server manually as there is no upstream type yet.
 		// BindPort
@@ -154,7 +154,7 @@ func setKubeAPIServerConfig(cfg *InitConfiguration, clusterConfig *spv1.ClusterC
 	return nil
 }
 
-func setInitConfigFromClusterConfig(cfg *InitConfiguration, clusterConfig *spv1.ClusterConfig) error {
+func setInitConfigFromClusterConfig(cfg *InitConfiguration, clusterConfig *spv2.ClusterConfig) error {
 	if err := setKubeAPIServerConfig(cfg, clusterConfig); err != nil {
 		return fmt.Errorf("unable to set configurable parameters for api-server: %v", err)
 	}
@@ -169,7 +169,7 @@ func setInitConfigFromClusterConfig(cfg *InitConfiguration, clusterConfig *spv1.
 	return nil
 }
 
-func setJoinConfigFromClusterConfig(cfg *JoinConfiguration, clusterConfig *spv1.ClusterConfig) {
+func setJoinConfigFromClusterConfig(cfg *JoinConfiguration, clusterConfig *spv2.ClusterConfig) {
 	cfg.Kubelet = clusterConfig.Kubelet
 }
 

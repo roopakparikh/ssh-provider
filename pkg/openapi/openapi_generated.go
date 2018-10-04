@@ -30,7 +30,7 @@ import (
 
 func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenAPIDefinition {
 	return map[string]common.OpenAPIDefinition{
-		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.ClientConnectionConfiguration": {
+		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.ClientConnectionConfiguration": {
 			Schema: spec.Schema{
 				SchemaProps: spec.SchemaProps{
 					Description: "ClientConnectionConfiguration contains details for constructing a client.",
@@ -75,7 +75,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 			},
 			Dependencies: []string{},
 		},
-		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.ClusterConfig": {
+		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.ClusterConfig": {
 			Schema: spec.Schema{
 				SchemaProps: spec.SchemaProps{
 					Properties: map[string]spec.Schema{
@@ -134,12 +134,12 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 						},
 						"kubeProxy": {
 							SchemaProps: spec.SchemaProps{
-								Ref: ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeProxyConfiguration"),
+								Ref: ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeProxyConfiguration"),
 							},
 						},
 						"kubelet": {
 							SchemaProps: spec.SchemaProps{
-								Ref: ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeletConfiguration"),
+								Ref: ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeletConfiguration"),
 							},
 						},
 						"networkBackend": {
@@ -172,9 +172,9 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 				},
 			},
 			Dependencies: []string{
-				"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeProxyConfiguration", "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeletConfiguration"},
+				"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeProxyConfiguration", "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeletConfiguration"},
 		},
-		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.ClusterSpec": {
+		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.ClusterSpec": {
 			Schema: spec.Schema{
 				SchemaProps: spec.SchemaProps{
 					Description: "ClusterSpec defines the desired provider-specific state of the cluster",
@@ -226,22 +226,22 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 						"vipConfiguration": {
 							SchemaProps: spec.SchemaProps{
 								Description: "VIPConfiguration is the configuration of the VIP for the API. If it is not specified, the VIP is not created.",
-								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.VIPConfiguration"),
+								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.VIPConfiguration"),
 							},
 						},
 						"clusterConfig": {
 							SchemaProps: spec.SchemaProps{
 								Description: "ClusterConfig is the set of configurable parameters for the cluster. If not provided, the parameters are set to their default values.",
-								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.ClusterConfig"),
+								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.ClusterConfig"),
 							},
 						},
 					},
 				},
 			},
 			Dependencies: []string{
-				"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.ClusterConfig", "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.VIPConfiguration", "k8s.io/api/core/v1.LocalObjectReference"},
+				"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.ClusterConfig", "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.VIPConfiguration", "k8s.io/api/core/v1.LocalObjectReference"},
 		},
-		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.ClusterStatus": {
+		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.ClusterStatus": {
 			Schema: spec.Schema{
 				SchemaProps: spec.SchemaProps{
 					Description: "ClusterStatus defines the observed provider-specific state of the cluster",
@@ -267,7 +267,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 								Items: &spec.SchemaOrArray{
 									Schema: &spec.Schema{
 										SchemaProps: spec.SchemaProps{
-											Ref: ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.EtcdMember"),
+											Ref: ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.EtcdMember"),
 										},
 									},
 								},
@@ -277,9 +277,9 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 				},
 			},
 			Dependencies: []string{
-				"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.EtcdMember"},
+				"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.EtcdMember"},
 		},
-		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.EtcdMember": {
+		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.EtcdMember": {
 			Schema: spec.Schema{
 				SchemaProps: spec.SchemaProps{
 					Description: "EtcdMember defines the configuration of an etcd member.",
@@ -332,7 +332,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 			},
 			Dependencies: []string{},
 		},
-		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeProxyConfiguration": {
+		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeProxyConfiguration": {
 			Schema: spec.Schema{
 				SchemaProps: spec.SchemaProps{
 					Description: "KubeProxyConfiguration contains everything necessary to configure the Kubernetes proxy server.",
@@ -410,19 +410,19 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 						"clientConnection": {
 							SchemaProps: spec.SchemaProps{
 								Description: "clientConnection specifies the kubeconfig file and client connection settings for the proxy server to use when communicating with the apiserver.",
-								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.ClientConnectionConfiguration"),
+								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.ClientConnectionConfiguration"),
 							},
 						},
 						"iptables": {
 							SchemaProps: spec.SchemaProps{
 								Description: "iptables contains iptables-related configuration options.",
-								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeProxyIPTablesConfiguration"),
+								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeProxyIPTablesConfiguration"),
 							},
 						},
 						"ipvs": {
 							SchemaProps: spec.SchemaProps{
 								Description: "ipvs contains ipvs-related configuration options.",
-								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeProxyIPVSConfiguration"),
+								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeProxyIPVSConfiguration"),
 							},
 						},
 						"oomScoreAdj": {
@@ -462,7 +462,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 						"conntrack": {
 							SchemaProps: spec.SchemaProps{
 								Description: "conntrack contains conntrack-related configuration options.",
-								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeProxyConntrackConfiguration"),
+								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeProxyConntrackConfiguration"),
 							},
 						},
 						"configSyncPeriod": {
@@ -490,9 +490,9 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 				},
 			},
 			Dependencies: []string{
-				"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.ClientConnectionConfiguration", "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeProxyConntrackConfiguration", "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeProxyIPTablesConfiguration", "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeProxyIPVSConfiguration", "k8s.io/apimachinery/pkg/apis/meta/v1.Duration"},
+				"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.ClientConnectionConfiguration", "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeProxyConntrackConfiguration", "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeProxyIPTablesConfiguration", "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeProxyIPVSConfiguration", "k8s.io/apimachinery/pkg/apis/meta/v1.Duration"},
 		},
-		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeProxyConntrackConfiguration": {
+		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeProxyConntrackConfiguration": {
 			Schema: spec.Schema{
 				SchemaProps: spec.SchemaProps{
 					Description: "KubeProxyConntrackConfiguration contains conntrack settings for the Kubernetes proxy server.",
@@ -536,7 +536,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 			Dependencies: []string{
 				"k8s.io/apimachinery/pkg/apis/meta/v1.Duration"},
 		},
-		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeProxyIPTablesConfiguration": {
+		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeProxyIPTablesConfiguration": {
 			Schema: spec.Schema{
 				SchemaProps: spec.SchemaProps{
 					Description: "KubeProxyIPTablesConfiguration contains iptables-related configuration details for the Kubernetes proxy server.",
@@ -573,7 +573,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 			Dependencies: []string{
 				"k8s.io/apimachinery/pkg/apis/meta/v1.Duration"},
 		},
-		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeProxyIPVSConfiguration": {
+		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeProxyIPVSConfiguration": {
 			Schema: spec.Schema{
 				SchemaProps: spec.SchemaProps{
 					Description: "KubeProxyIPVSConfiguration contains ipvs-related configuration details for the Kubernetes proxy server.",
@@ -603,7 +603,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 			Dependencies: []string{
 				"k8s.io/apimachinery/pkg/apis/meta/v1.Duration"},
 		},
-		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeletAnonymousAuthentication": {
+		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeletAnonymousAuthentication": {
 			Schema: spec.Schema{
 				SchemaProps: spec.SchemaProps{
 					Properties: map[string]spec.Schema{
@@ -619,35 +619,35 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 			},
 			Dependencies: []string{},
 		},
-		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeletAuthentication": {
+		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeletAuthentication": {
 			Schema: spec.Schema{
 				SchemaProps: spec.SchemaProps{
 					Properties: map[string]spec.Schema{
 						"x509": {
 							SchemaProps: spec.SchemaProps{
 								Description: "x509 contains settings related to x509 client certificate authentication",
-								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeletX509Authentication"),
+								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeletX509Authentication"),
 							},
 						},
 						"webhook": {
 							SchemaProps: spec.SchemaProps{
 								Description: "webhook contains settings related to webhook bearer token authentication",
-								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeletWebhookAuthentication"),
+								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeletWebhookAuthentication"),
 							},
 						},
 						"anonymous": {
 							SchemaProps: spec.SchemaProps{
 								Description: "anonymous contains settings related to anonymous authentication",
-								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeletAnonymousAuthentication"),
+								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeletAnonymousAuthentication"),
 							},
 						},
 					},
 				},
 			},
 			Dependencies: []string{
-				"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeletAnonymousAuthentication", "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeletWebhookAuthentication", "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeletX509Authentication"},
+				"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeletAnonymousAuthentication", "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeletWebhookAuthentication", "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeletX509Authentication"},
 		},
-		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeletAuthorization": {
+		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeletAuthorization": {
 			Schema: spec.Schema{
 				SchemaProps: spec.SchemaProps{
 					Properties: map[string]spec.Schema{
@@ -661,16 +661,16 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 						"webhook": {
 							SchemaProps: spec.SchemaProps{
 								Description: "webhook contains settings related to Webhook authorization.",
-								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeletWebhookAuthorization"),
+								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeletWebhookAuthorization"),
 							},
 						},
 					},
 				},
 			},
 			Dependencies: []string{
-				"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeletWebhookAuthorization"},
+				"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeletWebhookAuthorization"},
 		},
-		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeletConfiguration": {
+		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeletConfiguration": {
 			Schema: spec.Schema{
 				SchemaProps: spec.SchemaProps{
 					Description: "KubeletConfiguration contains the configuration for the Kubelet",
@@ -801,13 +801,13 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 						"authentication": {
 							SchemaProps: spec.SchemaProps{
 								Description: "authentication specifies how requests to the Kubelet's server are authenticated Defaults:\n  anonymous:\n    enabled: false\n  webhook:\n    enabled: true\n    cacheTTL: \"2m\"",
-								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeletAuthentication"),
+								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeletAuthentication"),
 							},
 						},
 						"authorization": {
 							SchemaProps: spec.SchemaProps{
 								Description: "authorization specifies how requests to the Kubelet's server are authorized Defaults:\n  mode: Webhook\n  webhook:\n    cacheAuthorizedTTL: \"5m\"\n    cacheUnauthorizedTTL: \"30s\"",
-								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeletAuthorization"),
+								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeletAuthorization"),
 							},
 						},
 						"registryPullQPS": {
@@ -1269,9 +1269,9 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 				},
 			},
 			Dependencies: []string{
-				"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeletAuthentication", "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeletAuthorization", "k8s.io/apimachinery/pkg/apis/meta/v1.Duration"},
+				"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeletAuthentication", "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeletAuthorization", "k8s.io/apimachinery/pkg/apis/meta/v1.Duration"},
 		},
-		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeletWebhookAuthentication": {
+		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeletWebhookAuthentication": {
 			Schema: spec.Schema{
 				SchemaProps: spec.SchemaProps{
 					Properties: map[string]spec.Schema{
@@ -1294,7 +1294,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 			Dependencies: []string{
 				"k8s.io/apimachinery/pkg/apis/meta/v1.Duration"},
 		},
-		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeletWebhookAuthorization": {
+		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeletWebhookAuthorization": {
 			Schema: spec.Schema{
 				SchemaProps: spec.SchemaProps{
 					Properties: map[string]spec.Schema{
@@ -1316,7 +1316,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 			Dependencies: []string{
 				"k8s.io/apimachinery/pkg/apis/meta/v1.Duration"},
 		},
-		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.KubeletX509Authentication": {
+		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.KubeletX509Authentication": {
 			Schema: spec.Schema{
 				SchemaProps: spec.SchemaProps{
 					Properties: map[string]spec.Schema{
@@ -1332,7 +1332,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 			},
 			Dependencies: []string{},
 		},
-		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.MachineComponentVersions": {
+		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.MachineComponentVersions": {
 			Schema: spec.Schema{
 				SchemaProps: spec.SchemaProps{
 					Description: "MachineComponentVersions",
@@ -1384,7 +1384,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 			},
 			Dependencies: []string{},
 		},
-		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.MachineSpec": {
+		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.MachineSpec": {
 			Schema: spec.Schema{
 				SchemaProps: spec.SchemaProps{
 					Description: "MachineSpec",
@@ -1427,16 +1427,16 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 						"componentVersions": {
 							SchemaProps: spec.SchemaProps{
 								Description: "ComponentVersions enumerates versions of all the components",
-								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.MachineComponentVersions"),
+								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.MachineComponentVersions"),
 							},
 						},
 					},
 				},
 			},
 			Dependencies: []string{
-				"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.MachineComponentVersions"},
+				"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.MachineComponentVersions"},
 		},
-		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.MachineStatus": {
+		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.MachineStatus": {
 			Schema: spec.Schema{
 				SchemaProps: spec.SchemaProps{
 					Description: "MachineStatus",
@@ -1458,7 +1458,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 						"sshConfig": {
 							SchemaProps: spec.SchemaProps{
 								Description: "SSHConfig is the configuration used to SSH to the machine.",
-								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.SSHConfig"),
+								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.SSHConfig"),
 							},
 						},
 						"vipNetworkInterface": {
@@ -1471,16 +1471,16 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 						"etcdMember": {
 							SchemaProps: spec.SchemaProps{
 								Description: "EtcdMember defines the observed etcd configuration of the machine. This field is populated for masters only.",
-								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.EtcdMember"),
+								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.EtcdMember"),
 							},
 						},
 					},
 				},
 			},
 			Dependencies: []string{
-				"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.EtcdMember", "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.SSHConfig"},
+				"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.EtcdMember", "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.SSHConfig"},
 		},
-		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.ProvisionedMachine": {
+		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.ProvisionedMachine": {
 			Schema: spec.Schema{
 				SchemaProps: spec.SchemaProps{
 					Description: "ProvisionedMachine describes a machine provisioned to accept SSH requests.",
@@ -1506,21 +1506,21 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 						},
 						"spec": {
 							SchemaProps: spec.SchemaProps{
-								Ref: ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.ProvisionedMachineSpec"),
+								Ref: ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.ProvisionedMachineSpec"),
 							},
 						},
 						"status": {
 							SchemaProps: spec.SchemaProps{
-								Ref: ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.ProvisionedMachineStatus"),
+								Ref: ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.ProvisionedMachineStatus"),
 							},
 						},
 					},
 				},
 			},
 			Dependencies: []string{
-				"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.ProvisionedMachineSpec", "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.ProvisionedMachineStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+				"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.ProvisionedMachineSpec", "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.ProvisionedMachineStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 		},
-		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.ProvisionedMachineList": {
+		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.ProvisionedMachineList": {
 			Schema: spec.Schema{
 				SchemaProps: spec.SchemaProps{
 					Description: "ProvisionedMachineList is a list of ProvisionedMachines.",
@@ -1550,7 +1550,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 								Items: &spec.SchemaOrArray{
 									Schema: &spec.Schema{
 										SchemaProps: spec.SchemaProps{
-											Ref: ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.ProvisionedMachine"),
+											Ref: ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.ProvisionedMachine"),
 										},
 									},
 								},
@@ -1561,9 +1561,9 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 				},
 			},
 			Dependencies: []string{
-				"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.ProvisionedMachine", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+				"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.ProvisionedMachine", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 		},
-		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.ProvisionedMachineSpec": {
+		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.ProvisionedMachineSpec": {
 			Schema: spec.Schema{
 				SchemaProps: spec.SchemaProps{
 					Description: "ProvisionedMachineSpec defines the desired state of ProvisionedMachine",
@@ -1571,7 +1571,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 						"sshConfig": {
 							SchemaProps: spec.SchemaProps{
 								Description: "SSHConfig specifies everything needed to ssh to a host",
-								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.SSHConfig"),
+								Ref:         ref("github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.SSHConfig"),
 							},
 						},
 						"vipNetworkInterface": {
@@ -1586,9 +1586,9 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 				},
 			},
 			Dependencies: []string{
-				"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.SSHConfig"},
+				"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.SSHConfig"},
 		},
-		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.ProvisionedMachineStatus": {
+		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.ProvisionedMachineStatus": {
 			Schema: spec.Schema{
 				SchemaProps: spec.SchemaProps{
 					Description: "ProvisionedMachineStatus defines the observed state of ProvisionedMachine",
@@ -1605,7 +1605,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 			Dependencies: []string{
 				"k8s.io/api/core/v1.LocalObjectReference"},
 		},
-		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.SSHConfig": {
+		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.SSHConfig": {
 			Schema: spec.Schema{
 				SchemaProps: spec.SchemaProps{
 					Description: "SSHConfig specifies everything needed to ssh to a host",
@@ -1651,7 +1651,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 			Dependencies: []string{
 				"k8s.io/api/core/v1.LocalObjectReference"},
 		},
-		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1.VIPConfiguration": {
+		"github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2.VIPConfiguration": {
 			Schema: spec.Schema{
 				SchemaProps: spec.SchemaProps{
 					Description: "VIPConfiguration specifies the parameters used to provision a virtual IP which API servers advertise and accept requests on.",

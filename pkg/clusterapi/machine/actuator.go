@@ -121,7 +121,7 @@ func (a *Actuator) Create(cluster *clusterv1.Cluster, machine *clusterv1.Machine
 	if err != nil {
 		return fmt.Errorf("unable to decode spec of machine %q: %v", machine.Name, err)
 	}
-	pm, err := a.spClient.SshproviderV1alpha1().ProvisionedMachines(machine.Namespace).Get(machineSpec.ProvisionedMachineName, metav1.GetOptions{})
+	pm, err := a.spClient.SshproviderV1alpha2().ProvisionedMachines(machine.Namespace).Get(machineSpec.ProvisionedMachineName, metav1.GetOptions{})
 	if err != nil {
 		return fmt.Errorf("unable to get provider machine %q bound to machine %q: %v", machineSpec.ProvisionedMachineName, machine.Name, err)
 	}
@@ -166,7 +166,7 @@ func (a *Actuator) Delete(cluster *clusterv1.Cluster, machine *clusterv1.Machine
 	if err != nil {
 		return fmt.Errorf("unable to decode spec of machine %q: %v", machine.Name, err)
 	}
-	pm, err := a.spClient.SshproviderV1alpha1().ProvisionedMachines(machine.Namespace).Get(machineSpec.ProvisionedMachineName, metav1.GetOptions{})
+	pm, err := a.spClient.SshproviderV1alpha2().ProvisionedMachines(machine.Namespace).Get(machineSpec.ProvisionedMachineName, metav1.GetOptions{})
 	if err != nil {
 		return fmt.Errorf("unable to get provider machine %q bound to machine %q: %v", machineSpec.ProvisionedMachineName, machine.Name, err)
 	}

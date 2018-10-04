@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/platform9/ssh-provider/pkg/api"
-	sshprovider "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1"
+	sshprovider "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"

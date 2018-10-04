@@ -19,12 +19,13 @@ limitations under the License.
 package sharedinformers
 
 import (
+	"time"
+
 	"github.com/kubernetes-incubator/apiserver-builder/pkg/controller"
 	"github.com/platform9/ssh-provider/pkg/client/clientset_generated/clientset"
 	"github.com/platform9/ssh-provider/pkg/client/informers_generated/externalversions"
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/cache"
-	"time"
 )
 
 // SharedInformers wraps all informers used by controllers so that

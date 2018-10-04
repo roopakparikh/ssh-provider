@@ -3,12 +3,12 @@ package controller
 import (
 	"fmt"
 
-	spv1 "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1"
+	spv2 "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2"
 	corev1 "k8s.io/api/core/v1"
 	clusterv1 "sigs.k8s.io/cluster-api/pkg/apis/cluster/v1alpha1"
 )
 
-func HasRole(a spv1.MachineRole, roles []spv1.MachineRole) bool {
+func HasRole(a spv2.MachineRole, roles []spv2.MachineRole) bool {
 	for _, b := range roles {
 		if b == a {
 			return true
@@ -17,12 +17,12 @@ func HasRole(a spv1.MachineRole, roles []spv1.MachineRole) bool {
 	return false
 }
 
-func IsMaster(machineSpec *spv1.MachineSpec) bool {
-	return HasRole(spv1.MasterRole, machineSpec.Roles)
+func IsMaster(machineSpec *spv2.MachineSpec) bool {
+	return HasRole(spv2.MasterRole, machineSpec.Roles)
 }
 
-func IsNode(machineSpec *spv1.MachineSpec) bool {
-	return HasRole(spv1.NodeRole, machineSpec.Roles)
+func IsNode(machineSpec *spv2.MachineSpec) bool {
+	return HasRole(spv2.NodeRole, machineSpec.Roles)
 }
 
 func UsernameAndKeyFromSecret(sshCredentialSecret *corev1.Secret) (string, string, error) {
@@ -39,7 +39,7 @@ func UsernameAndKeyFromSecret(sshCredentialSecret *corev1.Secret) (string, strin
 
 // BindMachineAndProvisionedMachine creates a bi-directional bind between
 // machine and provisioned machine.
-func BindMachineAndProvisionedMachine(machine *clusterv1.Machine, pm *spv1.ProvisionedMachine) error {
+func BindMachineAndProvisionedMachine(machine *clusterv1.Machine, pm *spv2.ProvisionedMachine) error {
 	// Bind the provisioned machine to the machine
 	if pm.Status.MachineRef == nil {
 		pm.Status.MachineRef = &corev1.LocalObjectReference{}

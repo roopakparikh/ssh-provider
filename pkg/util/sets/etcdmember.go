@@ -21,12 +21,12 @@ package sets
 import (
 	"sort"
 
-	spv1 "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1"
+	spv2 "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2"
 )
 
-type EtcdMemberSet map[uint64]spv1.EtcdMember
+type EtcdMemberSet map[uint64]spv2.EtcdMember
 
-func NewEtcdMemberSet(items ...spv1.EtcdMember) EtcdMemberSet {
+func NewEtcdMemberSet(items ...spv2.EtcdMember) EtcdMemberSet {
 	s := EtcdMemberSet{}
 	for _, item := range items {
 		s[item.ID] = item
@@ -34,39 +34,39 @@ func NewEtcdMemberSet(items ...spv1.EtcdMember) EtcdMemberSet {
 	return s
 }
 
-func (s EtcdMemberSet) Insert(items ...spv1.EtcdMember) {
+func (s EtcdMemberSet) Insert(items ...spv2.EtcdMember) {
 	for _, item := range items {
 		s[item.ID] = item
 	}
 }
 
-func (s EtcdMemberSet) Delete(items ...spv1.EtcdMember) {
+func (s EtcdMemberSet) Delete(items ...spv2.EtcdMember) {
 	for _, item := range items {
 		delete(s, item.ID)
 	}
 }
 
-func (s EtcdMemberSet) Has(item spv1.EtcdMember) bool {
+func (s EtcdMemberSet) Has(item spv2.EtcdMember) bool {
 	_, contained := s[item.ID]
 	return contained
 }
 
-type sortableSliceOfEtcdMember []spv1.EtcdMember
+type sortableSliceOfEtcdMember []spv2.EtcdMember
 
 func (s sortableSliceOfEtcdMember) Len() int           { return len(s) }
 func (s sortableSliceOfEtcdMember) Less(i, j int) bool { return lessEtcdMember(s[i], s[j]) }
 func (s sortableSliceOfEtcdMember) Swap(i, j int)      { s[i], s[j] = s[j], s[i] }
 
 // List returns the contents as a slice sorted by etcd member ID.
-func (s EtcdMemberSet) List() []spv1.EtcdMember {
+func (s EtcdMemberSet) List() []spv2.EtcdMember {
 	res := make(sortableSliceOfEtcdMember, 0, len(s))
 	for _, v := range s {
 		res = append(res, v)
 	}
 	sort.Sort(res)
-	return []spv1.EtcdMember(res)
+	return []spv2.EtcdMember(res)
 }
 
-func lessEtcdMember(lhs, rhs spv1.EtcdMember) bool {
+func lessEtcdMember(lhs, rhs spv2.EtcdMember) bool {
 	return lhs.ID < rhs.ID
 }

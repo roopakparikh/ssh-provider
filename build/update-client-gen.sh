@@ -38,16 +38,26 @@ ${BINDIR}/client-gen "$@" \
 		--clientset-path "github.com/platform9/ssh-provider/pkg/client/clientset_generated/" \
 		--clientset-name "clientset" \
 		--go-header-file "boilerplate.go.txt"
+# Generate the versioned clientset (pkg/client/clientset_generated/clientset)
+${BINDIR}/client-gen "$@" \
+		--input-base "github.com/platform9/ssh-provider/pkg/apis/" \
+		--input "sshprovider/v1alpha2" \
+		--input "sshprovider/v1alpha1" \
+		--clientset-path "github.com/platform9/ssh-provider/pkg/client/clientset_generated/" \
+		--clientset-name "clientset" \
+		--go-header-file "boilerplate.go.txt"
 # generate lister
-	${BINDIR}/lister-gen "$@" \
+${BINDIR}/lister-gen "$@" \
 		--input-dirs="github.com/platform9/ssh-provider/pkg/apis/sshprovider" \
 		--input-dirs="github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1" \
+		--input-dirs="github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2" \
 		--output-package "github.com/platform9/ssh-provider/pkg/client/listers_generated" \
 		--go-header-file "boilerplate.go.txt"
 # generate informer
 ${BINDIR}/informer-gen "$@" \
 		--input-dirs "github.com/platform9/ssh-provider/pkg/apis/sshprovider" \
 		--input-dirs "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1" \
+		--input-dirs "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2" \
 		--internal-clientset-package "github.com/platform9/ssh-provider/pkg/client/clientset_generated/internalclientset" \
 		--versioned-clientset-package "github.com/platform9/ssh-provider/pkg/client/clientset_generated/clientset" \
 		--listers-package "github.com/platform9/ssh-provider/pkg/client/listers_generated" \

@@ -25,35 +25,44 @@ REPO_ROOT=$(cd $(dirname "${BASH_SOURCE}")/..; pwd)
 BINDIR=${REPO_ROOT}/bin
 CO_PKG='github.com/platform9/ssh-provider'
 
-# Generate defaults
-${BINDIR}/defaulter-gen "$@" \
-	 --v 1 --logtostderr \
-	 --go-header-file "boilerplate.go.txt" \
-	 --input-dirs "${CO_PKG}/pkg/apis/sshprovider" \
-	 --input-dirs "${CO_PKG}/pkg/apis/sshprovider/v1alpha1" \
-	 --extra-peer-dirs "${CO_PKG}/pkg/apis/sshprovider" \
-	 --extra-peer-dirs "${CO_PKG}/pkg/apis/sshprovider/v1alpha1" \
-	 --output-file-base "zz_generated.defaults"
-# Generate deep copies
-${BINDIR}/deepcopy-gen "$@" \
-	 --v 1 --logtostderr \
-	 --go-header-file "boilerplate.go.txt" \
-	 --input-dirs "${CO_PKG}/pkg/apis/sshprovider" \
-	 --input-dirs "${CO_PKG}/pkg/apis/sshprovider/v1alpha1" \
-	 --bounding-dirs "github.com/kubernetes-incubator/service-catalog" \
-	 --output-file-base zz_generated.deepcopy
-# Generate conversions
-${BINDIR}/conversion-gen "$@" \
-	 --v 1 --logtostderr \
-	 --extra-peer-dirs k8s.io/api/core/v1,k8s.io/apimachinery/pkg/apis/meta/v1,k8s.io/apimachinery/pkg/conversion,k8s.io/apimachinery/pkg/runtime \
-	 --go-header-file "boilerplate.go.txt" \
-	 --input-dirs "${CO_PKG}/pkg/apis/sshprovider" \
-	 --input-dirs "${CO_PKG}/pkg/apis/sshprovider/v1alpha1" \
-	 --output-file-base zz_generated.conversion
+function generate () {
+	# Generate defaults
+    ${BINDIR}/defaulter-gen "$@" \
+    	 --v 1 --logtostderr \
+    	 --go-header-file "boilerplate.go.txt" \
+    	 --input-dirs "${CO_PKG}/pkg/apis/sshprovider" \
+    	 --input-dirs "${CO_PKG}/pkg/apis/sshprovider/$API_VERSION" \
+    	 --extra-peer-dirs "${CO_PKG}/pkg/apis/sshprovider" \
+    	 --extra-peer-dirs "${CO_PKG}/pkg/apis/sshprovider/$API_VERSION" \
+    	 --output-file-base "zz_generated.defaults"
+    # Generate deep copies
+    ${BINDIR}/deepcopy-gen "$@" \
+    	 --v 1 --logtostderr \
+    	 --go-header-file "boilerplate.go.txt" \
+    	 --input-dirs "${CO_PKG}/pkg/apis/sshprovider" \
+    	 --input-dirs "${CO_PKG}/pkg/apis/sshprovider/$API_VERSION" \
+    	 --bounding-dirs "github.com/kubernetes-incubator/service-catalog" \
+    	 --output-file-base zz_generated.deepcopy
+    # Generate conversions
+    ${BINDIR}/conversion-gen "$@" \
+    	 --v 1 --logtostderr \
+    	 --extra-peer-dirs k8s.io/api/core/v1,k8s.io/apimachinery/pkg/apis/meta/v1,k8s.io/apimachinery/pkg/conversion,k8s.io/apimachinery/pkg/runtime \
+    	 --go-header-file "boilerplate.go.txt" \
+    	 --input-dirs "${CO_PKG}/pkg/apis/sshprovider" \
+    	 --input-dirs "${CO_PKG}/pkg/apis/sshprovider/$API_VERSION" \
+    	 --output-file-base zz_generated.conversion
 
-# generate openapi for sshprovider
-${BINDIR}/openapi-gen "$@" \
-	--v 1 --logtostderr \
-	--go-header-file "boilerplate.go.txt" \
-	--input-dirs "${CO_PKG}/pkg/apis/sshprovider/v1alpha1,k8s.io/api/core/v1,k8s.io/apimachinery/pkg/apis/meta/v1" \
-	--output-package "${CO_PKG}/pkg/openapi"
+    # generate openapi for sshprovider
+    ${BINDIR}/openapi-gen "$@" \
+    	--v 1 --logtostderr \
+    	--go-header-file "boilerplate.go.txt" \
+    	--input-dirs "${CO_PKG}/pkg/apis/sshprovider/$API_VERSION,k8s.io/api/core/v1,k8s.io/apimachinery/pkg/apis/meta/v1" \
+    	--output-package "${CO_PKG}/pkg/openapi"
+
+}
+API_DIRS=$(find ./pkg/apis/sshprovider -name "v1alpha*" -mindepth 1 -maxdepth 1 -type d)
+for dir in $API_DIRS;
+do
+	API_VERSION=$(basename $dir)
+	generate
+done

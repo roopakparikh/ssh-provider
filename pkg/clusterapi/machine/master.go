@@ -9,13 +9,13 @@ import (
 
 	"github.com/platform9/ssh-provider/pkg/nodeadm"
 
-	spv1 "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha1"
+	spv2 "github.com/platform9/ssh-provider/pkg/apis/sshprovider/v1alpha2"
 	"github.com/platform9/ssh-provider/pkg/controller"
 	"github.com/platform9/ssh-provider/pkg/machine"
 	clusterv1 "sigs.k8s.io/cluster-api/pkg/apis/cluster/v1alpha1"
 )
 
-func (a *Actuator) createMaster(cluster *clusterv1.Cluster, machine *clusterv1.Machine, pm *spv1.ProvisionedMachine, machineClient machine.Client) error {
+func (a *Actuator) createMaster(cluster *clusterv1.Cluster, machine *clusterv1.Machine, pm *spv2.ProvisionedMachine, machineClient machine.Client) error {
 	machineSpec, err := controller.GetMachineSpec(*machine)
 	if err != nil {
 		return fmt.Errorf("unable to decode spec of machine %q: %v", machine.Name, err)
@@ -67,8 +67,8 @@ func (a *Actuator) deleteMaster(machine *clusterv1.Machine, machineClient machin
 	return nil
 }
 
-func etcdMemberFromMachine(machine *clusterv1.Machine, machineClient machine.Client) (spv1.EtcdMember, error) {
-	var etcdMember spv1.EtcdMember
+func etcdMemberFromMachine(machine *clusterv1.Machine, machineClient machine.Client) (spv2.EtcdMember, error) {
+	var etcdMember spv2.EtcdMember
 	cmd := fmt.Sprintf("%s info", EtcdadmPath)
 	stdOut, stdErr, err := machineClient.RunCommand(cmd)
 	if err != nil {
@@ -149,7 +149,7 @@ func resetEtcd(machineClient machine.Client) error {
 	return nil
 }
 
-func deployKubernetesMaster(cluster *clusterv1.Cluster, machine *clusterv1.Machine, pm *spv1.ProvisionedMachine, machineClient machine.Client) error {
+func deployKubernetesMaster(cluster *clusterv1.Cluster, machine *clusterv1.Machine, pm *spv2.ProvisionedMachine, machineClient machine.Client) error {
 	initConfig, err := nodeadm.InitConfigurationForMachine(*cluster, *machine, *pm)
 	if err != nil {
 		return fmt.Errorf("error creating nodeadm init configuration: %v", err)
