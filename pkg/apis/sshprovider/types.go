@@ -66,6 +66,21 @@ type ClusterConfig struct {
 	Kubelet               *KubeletConfiguration
 	NetworkBackend        map[string]string
 	KeepAlived            map[string]string
+	Flags                 *CctlConfiguration
+}
+
+type CctlConfiguration struct {
+	ServiceNetwork   string
+	PodNetwork       string
+	VIPConfiguration *VIPConfiguration
+	APIServerCACert  string
+	APIServerCAKey   string
+	EtcdCACert       string
+	EtcdCAKey        string
+	FrontProxyCACert string
+	FrontProxyCAKey  string
+	SaPrivateKey     string
+	SaPublicKey      string
 }
 
 // VIPConfiguration specifies the parameters used to provision a virtual IP

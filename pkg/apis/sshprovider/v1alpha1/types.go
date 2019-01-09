@@ -83,6 +83,21 @@ type ClusterConfig struct {
 	Kubelet               *KubeletConfiguration   `json:"kubelet,omitempty"`
 	NetworkBackend        map[string]string       `json:"networkBackend,omitempty"`
 	KeepAlived            map[string]string       `json:"keepAlived,omitempty"`
+	Flags                 *CctlConfiguration      `json:"flags,omitempty"`
+}
+
+type CctlConfiguration struct {
+	ServiceNetwork   string            `json:"serviceNetwork,omitempty"`
+	PodNetwork       string            `json:"podNetwork,omitempty"`
+	VIPConfiguration *VIPConfiguration `json:"vipConfiguration,omitempty"`
+	APIServerCACert  string            `json:"apiserverCACert,omitempty"`
+	APIServerCAKey   string            `json:"apiserverCAKey,omitempty"`
+	EtcdCACert       string            `json:"etcdCACert,omitempty"`
+	EtcdCAKey        string            `json:"etcdCAKey,omitempty"`
+	FrontProxyCACert string            `json:"frontProxyCACert,omitempty"`
+	FrontProxyCAKey  string            `json:"frontProxyCAKey,omitempty"`
+	SaPrivateKey     string            `json:"saPrivateKey,omitempty"`
+	SaPublicKey      string            `json:"saPublicKey,omitempty"`
 }
 
 // VIPConfiguration specifies the parameters used to provision a virtual IP
